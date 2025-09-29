@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArtistController extends Controller
 {
@@ -12,7 +13,13 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        //
+
+        $artists = Artist::all();
+
+        return response()->json([
+            'artists' => $artists,
+            'message' => 'Artists Fetched Successfully'
+        ], 200);
     }
 
     /**
@@ -28,7 +35,19 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'genre' => 'required|string',
+            'country' => 'required|string',
+        ]);
+
+        $artist = Artist::create($validated);
+        return response()->json([
+            'artist' => $artist,
+            'message' => 'Artist Created Successfully'
+        ], 201);
+
     }
 
     /**
@@ -50,16 +69,34 @@ class ArtistController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Artist $artist)
+    public function update(Request $request, $id)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'genre' => 'required|string',
+            'country' => 'required|string',
+        ]);
+
+        $artist = Artist::findOrFail($id);
+        $artist->update($validated);
+
+        return response()->json([
+            'artist' => $artist,
+            'message' => 'Artist Updated Successfully'
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Artist $artist)
+    public function destroy($id)
     {
-        //
+        $artist = Artist::findOrFail($id);
+        $artist->delete();
+
+        return response()->json([
+            'message' => 'Artist Deleted Successfully'
+        ], 200);
     }
 }
