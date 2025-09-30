@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -32,3 +33,8 @@ Route::get('/albums',[AlbumController::class, 'index'])->middleware('auth:sanctu
 Route::post('/create-album',[AlbumController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/update-album/{album}',[AlbumController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/delete-album/{album}',[AlbumController::class,'destroy'])->middleware('auth:sanctum');
+
+Route::get('/songs',[SongController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/create-song',[SongController::class, 'store'])->middleware('auth:sanctum');
+Route::put('/update-song/{song}',[SongController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/delete-song/{song}',[SongController::class, 'destroy'])->middleware('auth:sanctum');
