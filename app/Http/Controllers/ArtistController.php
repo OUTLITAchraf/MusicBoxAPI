@@ -11,10 +11,18 @@ class ArtistController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $artists = Artist::all();
+        $query = Artist::query();
+
+        // Filter by genre if provided
+        if ($request->has('genre')) {
+            $query->where('genre', $request->genre);
+        }
+
+        // Add pagination (10 artists per page)
+        $artists = $query->paginate(10);
 
         return response()->json([
             'artists' => $artists,
