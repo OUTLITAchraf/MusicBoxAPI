@@ -14,7 +14,7 @@ class ArtistController extends Controller
     public function index()
     {
 
-        $artists = Artist::all();
+        $artists = Artist::with('albums.songs')->get();
 
         return response()->json([
             'artists' => $artists,

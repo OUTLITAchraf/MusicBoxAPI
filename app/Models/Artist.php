@@ -14,4 +14,7 @@ class Artist extends Model
         'genre',
         'country',
     ];
+    public function albums(){
+        return $this->hasMany(Album::class);
+    }
 }
