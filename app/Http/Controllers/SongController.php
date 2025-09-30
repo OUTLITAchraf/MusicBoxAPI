@@ -101,4 +101,31 @@ class SongController extends Controller
             'message' => 'Song Deleted Successfully'
         ], 200);
     }
+
+    public function search(Request $request)
+    {
+        $query = Song::with('album.artist');
+
+        if ($request->has('title')) {
+            $query->where('title', 'LIKE', '%' . $request->title . '%');
+        }
+
+        if ($request->has('artist')) {
+            $query->whereHas('album.artist', function ($q) use ($request) {
+                $q->where('name', 'LIKE', '%' . $request->artist . '%');
+            });
+        }
+
+        if (!$query) {
+            return response()->json([
+                'message' => 'No Data Found'
+            ], 404);
+        }
+        $songs = $query->paginate(10);
+
+        return response()->json($songs);
+    }
+
+    
+
 }

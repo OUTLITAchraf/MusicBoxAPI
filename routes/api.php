@@ -23,21 +23,25 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
 
-Route::get('/artists', [ArtistController::class, 'index'])->middleware('auth:sanctum');
-Route::get('/artist/{artist}',[ArtistController::class, 'show'])->middleware('auth:sanctum');
-Route::post('/create-artist',[ArtistController::class, 'store'])->middleware('auth:sanctum');
-Route::put('/update-artist/{artist}',[ArtistController::class, 'update'])->middleware('auth:sanctum');
-Route::delete('/delete-artist/{artist}',[ArtistController::class,'destroy'])->middleware('auth:sanctum');
+    Route::get('/artists', [ArtistController::class, 'index']);
+    Route::get('/artist/{artist}', [ArtistController::class, 'show']);
+    Route::post('/create-artist', [ArtistController::class, 'store']);
+    Route::put('/update-artist/{artist}', [ArtistController::class, 'update']);
+    Route::delete('/delete-artist/{artist}', [ArtistController::class, 'destroy']);
 
-Route::get('/albums',[AlbumController::class, 'index'])->middleware('auth:sanctum');
-Route::get('/album/{album}',[AlbumController::class, 'show'])->middleware('auth:sanctum');
-Route::post('/create-album',[AlbumController::class, 'store'])->middleware('auth:sanctum');
-Route::put('/update-album/{album}',[AlbumController::class, 'update'])->middleware('auth:sanctum');
-Route::delete('/delete-album/{album}',[AlbumController::class,'destroy'])->middleware('auth:sanctum');
+    Route::get('/albums', [AlbumController::class, 'index']);
+    Route::get('/album/{album}', [AlbumController::class, 'show']);
+    Route::post('/create-album', [AlbumController::class, 'store']);
+    Route::put('/update-album/{album}', [AlbumController::class, 'update']);
+    Route::delete('/delete-album/{album}', [AlbumController::class, 'destroy']);
 
-Route::get('/songs',[SongController::class, 'index'])->middleware('auth:sanctum');
-Route::get('/song/{song}',[SongController::class, 'show'])->middleware('auth:sanctum');
-Route::post('/create-song',[SongController::class, 'store'])->middleware('auth:sanctum');
-Route::put('/update-song/{song}',[SongController::class, 'update'])->middleware('auth:sanctum');
-Route::delete('/delete-song/{song}',[SongController::class, 'destroy'])->middleware('auth:sanctum');
+    Route::get('/songs', [SongController::class, 'index']);
+    Route::get('/song/{song}', [SongController::class, 'show']);
+    Route::get('/songs/search', [SongController::class, 'search']);
+    Route::post('/create-song', [SongController::class, 'store']);
+    Route::put('/update-song/{song}', [SongController::class, 'update']);
+    Route::delete('/delete-song/{song}', [SongController::class, 'destroy']);
+
+});
