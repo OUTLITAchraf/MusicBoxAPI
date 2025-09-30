@@ -14,7 +14,7 @@ class ArtistController extends Controller
     public function index()
     {
 
-        $artists = Artist::with('albums.songs')->get();
+        $artists = Artist::all();
 
         return response()->json([
             'artists' => $artists,
@@ -53,9 +53,15 @@ class ArtistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Artist $artist)
+    public function show($id)
     {
-        //
+        $artist = Artist::findOrFail($id);
+        $artist->load('albums.songs');
+
+        return response()->json([
+            'artist' => $artist,
+            'message' => 'Arist Fetched Successfully'
+        ], 200);
     }
 
     /**

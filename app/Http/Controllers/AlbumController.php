@@ -12,7 +12,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::with('artist')->get();
+        $albums = Album::all();
 
         return response()->json([
             'albums' => $albums,
@@ -51,9 +51,15 @@ class AlbumController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Album $album)
+    public function show($id)
     {
-        //
+        $album = Album::findOrFail($id);
+        $album->load('artist','songs');
+
+        return response()->json([
+            'album' => $album,
+            'message' => 'Album Fetched Successfully',
+        ], 200);
     }
 
     /**

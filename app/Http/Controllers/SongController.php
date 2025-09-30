@@ -12,7 +12,7 @@ class SongController extends Controller
      */
     public function index()
     {
-        $songs = Song::with('album.artist')->get();
+        $songs = Song::all();
 
         return response()->json([
             'songs' => $songs,
@@ -50,9 +50,15 @@ class SongController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Song $song)
+    public function show($id)
     {
-        //
+        $song = Song::findOrFail($id);
+        $song->load('album.artist');
+
+        return response()->json([
+            'song' => $song,
+            'message' => 'Song Fetched Successfully'
+        ]);
     }
 
     /**
