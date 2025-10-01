@@ -4,14 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Tag(
+ *     name="Artists",
+ *     description="API Endpoints for Artists"
+ * )
+ */
 class ArtistController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/artists",
+     *     tags={"Artists"},
+     *     summary="Get list of artists",
+     *     @OA\Parameter(
+     *         name="genre",
+     *         in="query",
+     *         description="Filter artists by genre",
+     *         required=false,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="artists",
+     *                 type="object",
+     *                 @OA\Property(property="data", type="array",
+     *                     @OA\Items(
+     *                         type="object",
+     *                         @OA\Property(property="id", type="integer", example=1),
+     *                         @OA\Property(property="name", type="string", example="Artist Name"),
+     *                         @OA\Property(property="genre", type="string", example="Rock"),
+     *                         @OA\Property(property="country", type="string", example="USA")
+     *                     )
+     *                 )
+     *             ),
+     *             @OA\Property(property="message", type="string", example="Artists Fetched Successfully")
+     *         )
+     *     )
+     * )
      */
-    public function index(Request $request)
+    public function index(Request $request) 
     {
 
         $query = Artist::query();
@@ -31,17 +68,39 @@ class ArtistController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @OA\Post(
+     *     path="/api/artists",
+     *     tags={"Artists"},
+     *     summary="Create a new artist",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name","genre","country"},
+     *             @OA\Property(property="name", type="string", example="New Artist"),
+     *             @OA\Property(property="genre", type="string", example="Rock"),
+     *             @OA\Property(property="country", type="string", example="France")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Artist created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="artist", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="New Artist"),
+     *                 @OA\Property(property="genre", type="string", example="Rock"),
+     *                 @OA\Property(property="country", type="string", example="France")
+     *             ),
+     *             @OA\Property(property="message", type="string", example="Artist Created Successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error"
+     *     )
+     * )
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
 
         $validated = $request->validate([
@@ -59,9 +118,55 @@ class ArtistController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/artists/{id}",
+     *     tags={"Artists"},
+     *     summary="Get artist by ID with their albums and songs",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Artist ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="artist", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Artist Name"),
+     *                 @OA\Property(property="genre", type="string", example="Rock"),
+     *                 @OA\Property(property="country", type="string", example="USA"),
+     *                 @OA\Property(
+     *                     property="albums",
+     *                     type="array",
+     *                     @OA\Items(
+     *                         type="object",
+     *                         @OA\Property(property="id", type="integer", example=1),
+     *                         @OA\Property(property="title", type="string", example="Album Title"),
+     *                         @OA\Property(
+     *                             property="songs",
+     *                             type="array",
+     *                             @OA\Items(
+     *                                 type="object",
+     *                                 @OA\Property(property="id", type="integer", example=1),
+     *                                 @OA\Property(property="title", type="string", example="Song Title")
+     *                             )
+     *                         )
+     *                     )
+     *                 )
+     *             ),
+     *             @OA\Property(property="message", type="string", example="Artist Fetched Successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Artist not found"
+     *     )
+     * )
      */
-    public function show($id)
+    public function show($id) 
     {
         $artist = Artist::findOrFail($id);
         $artist->load('albums.songs');
@@ -73,17 +178,41 @@ class ArtistController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @OA\Put(
+     *     path="/api/artists/{id}",
+     *     tags={"Artists"},
+     *     summary="Update existing artist",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Artist ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name","genre","country"},
+     *             @OA\Property(property="name", type="string", example="Updated Artist Name"),
+     *             @OA\Property(property="genre", type="string", example="Jazz"),
+     *             @OA\Property(property="country", type="string", example="France")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Artist updated successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="artist", type="object"),
+     *             @OA\Property(property="message", type="string", example="Artist Updated Successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Artist not found"
+     *     )
+     * )
      */
-    public function edit(Artist $artist)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) 
     {
 
         $validated = $request->validate([
@@ -102,9 +231,31 @@ class ArtistController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/artists/{id}",
+     *     tags={"Artists"},
+     *     summary="Delete an artist",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Artist ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Artist deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Artist Deleted Successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Artist not found"
+     *     )
+     * )
      */
-    public function destroy($id)
+    public function destroy($id) 
     {
         $artist = Artist::findOrFail($id);
         $artist->delete();

@@ -4,11 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Tag(
+ *     name="Albums",
+ *     description="API Endpoints for Albums"
+ * )
+ */
 class AlbumController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/albums",
+     *     tags={"Albums"},
+     *     summary="Get list of albums",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="albums",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(property="id", type="integer", example=1),
+     *                     @OA\Property(property="title", type="string", example="Album Title"),
+     *                     @OA\Property(property="genre", type="string", example="Rock"),
+     *                     @OA\Property(property="release_date", type="string", format="date", example="2023-09-30"),
+     *                     @OA\Property(property="artist_id", type="integer", example=1)
+     *                 )
+     *             ),
+     *             @OA\Property(property="message", type="string", example="Albums Fetched Successfully")
+     *         )
+     *     )
+     * )
      */
     public function index()
     {
@@ -29,7 +59,29 @@ class AlbumController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/albums",
+     *     tags={"Albums"},
+     *     summary="Create a new album",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"title","genre","release_date","artist_id"},
+     *             @OA\Property(property="title", type="string", example="New Album"),
+     *             @OA\Property(property="genre", type="string", example="Rock"),
+     *             @OA\Property(property="release_date", type="string", format="date", example="2023-09-30"),
+     *             @OA\Property(property="artist_id", type="integer", example=1)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Album created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="album", type="object"),
+     *             @OA\Property(property="message", type="string", example="Album Created Successfully")
+     *         )
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -49,7 +101,25 @@ class AlbumController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/albums/{id}",
+     *     tags={"Albums"},
+     *     summary="Get album by ID with artist and songs",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="album", type="object"),
+     *             @OA\Property(property="message", type="string", example="Album Fetched Successfully")
+     *         )
+     *     )
+     * )
      */
     public function show($id)
     {
@@ -71,7 +141,34 @@ class AlbumController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/albums/{id}",
+     *     tags={"Albums"},
+     *     summary="Update album",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(
+     *             required={"title","genre","release_date","artist_id"},
+     *             @OA\Property(property="title", type="string"),
+     *             @OA\Property(property="genre", type="string"),
+     *             @OA\Property(property="release_date", type="string", format="date"),
+     *             @OA\Property(property="artist_id", type="integer")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="album", type="object"),
+     *             @OA\Property(property="message", type="string", example="Album Updated Successfully")
+     *         )
+     *     )
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -92,7 +189,24 @@ class AlbumController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/albums/{id}",
+     *     tags={"Albums"},
+     *     summary="Delete album",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Album Deleted Successfully")
+     *         )
+     *     )
+     * )
      */
     public function destroy($id)
     {
