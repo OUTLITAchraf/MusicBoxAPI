@@ -70,7 +70,7 @@ class ArtistController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/artists",
+     *     path="/create-artist",
      *     tags={"Artists"},
      *     summary="Create a new artist",
      *     security={{"bearerAuth":{}}},
@@ -121,7 +121,7 @@ class ArtistController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/artists/{id}",
+     *     path="/artist/{id}",
      *     tags={"Artists"},
      *     summary="Get artist by ID with their albums and songs",
      *     security={{"bearerAuth":{}}},
@@ -182,7 +182,7 @@ class ArtistController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/artists/{id}",
+     *     path="/update-artist/{id}",
      *     tags={"Artists"},
      *     summary="Update existing artist",
      *     security={{"bearerAuth":{}}},
@@ -236,7 +236,7 @@ class ArtistController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/artists/{id}",
+     *     path="/delete-artist/{id}",
      *     tags={"Artists"},
      *     summary="Delete an artist",
      *     security={{"bearerAuth":{}}},

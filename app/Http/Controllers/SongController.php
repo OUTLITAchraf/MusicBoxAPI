@@ -60,7 +60,7 @@ class SongController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/songs",
+     *     path="/create-song",
      *     tags={"Songs"},
      *     summary="Create a new song",
      *     security={{"bearerAuth":{}}},
@@ -105,7 +105,7 @@ class SongController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/songs/{id}",
+     *     path="/song/{id}",
      *     tags={"Songs"},
      *     summary="Get song by ID with album and artist",
      *     security={{"bearerAuth":{}}},
@@ -169,7 +169,7 @@ class SongController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/songs/{id}",
+     *     path="/update-song/{id}",
      *     tags={"Songs"},
      *     summary="Update existing song",
      *     security={{"bearerAuth":{}}},
@@ -221,7 +221,7 @@ class SongController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/songs/{id}",
+     *     path="/delete-song/{id}",
      *     tags={"Songs"},
      *     summary="Delete a song",
      *     security={{"bearerAuth":{}}},
@@ -257,7 +257,7 @@ class SongController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/songs/search",
+     *     path="/songs/search",
      *     tags={"Songs"},
      *     summary="Search songs by title or artist",
      *     security={{"bearerAuth":{}}},

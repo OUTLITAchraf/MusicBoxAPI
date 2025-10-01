@@ -61,7 +61,7 @@ class AlbumController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/albums",
+     *     path="/create-album",
      *     tags={"Albums"},
      *     summary="Create a new album",
      *     security={{"bearerAuth":{}}},
@@ -104,7 +104,7 @@ class AlbumController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/albums/{id}",
+     *     path="/album/{id}",
      *     tags={"Albums"},
      *     summary="Get album by ID with artist and songs",
      *     security={{"bearerAuth":{}}},
@@ -145,7 +145,7 @@ class AlbumController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/albums/{id}",
+     *     path="/update-album/{id}",
      *     tags={"Albums"},
      *     summary="Update album",
      *     security={{"bearerAuth":{}}},
@@ -194,7 +194,7 @@ class AlbumController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/albums/{id}",
+     *     path="/delete-album/{id}",
      *     tags={"Albums"},
      *     summary="Delete album",
      *     security={{"bearerAuth":{}}},

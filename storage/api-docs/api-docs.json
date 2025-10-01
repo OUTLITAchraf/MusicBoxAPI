@@ -74,13 +74,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/create-album": {
             "post": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Create a new album",
-                "operationId": "e2953334b8702ac4d6cc93c63b7440ef",
+                "operationId": "f3e7d46bee002811849594c2cda55228",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -144,13 +146,13 @@
                 ]
             }
         },
-        "/albums/{id}": {
+        "/album/{id}": {
             "get": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Get album by ID with artist and songs",
-                "operationId": "6a68209549d4d66cd13500611af64336",
+                "operationId": "ab99ef3b8af190380c7483bcfedced79",
                 "parameters": [
                     {
                         "name": "id",
@@ -187,13 +189,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/update-album/{id}": {
             "put": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Update album",
-                "operationId": "9d45cc434d36c93ef067bbd2be12a53c",
+                "operationId": "4ae591c035ecc603b152e5ccf4ddf220",
                 "parameters": [
                     {
                         "name": "id",
@@ -260,13 +264,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/delete-album/{id}": {
             "delete": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Delete album",
-                "operationId": "b148d53b889a5c777b217bb73821307e",
+                "operationId": "06bb149ec22d0b46a709d26d6f82111a",
                 "parameters": [
                     {
                         "name": "id",
@@ -372,13 +378,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/create-artist": {
             "post": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Create a new artist",
-                "operationId": "02d849b7e76cdecf89814f7cf5ad17e3",
+                "operationId": "c7f80ff9dcd689f3c5d4a4a9438917fe",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -457,13 +465,13 @@
                 ]
             }
         },
-        "/artists/{id}": {
+        "/artist/{id}": {
             "get": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Get artist by ID with their albums and songs",
-                "operationId": "72409b143e96ba16780ec0cf7bf56b62",
+                "operationId": "f164438c9b930628a2855c67cd17d8db",
                 "parameters": [
                     {
                         "name": "id",
@@ -554,13 +562,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/update-artist/{id}": {
             "put": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Update existing artist",
-                "operationId": "5384c3d91429ef750acd6efe62cddef3",
+                "operationId": "ad64eeb4f8c481e4e17e13c9d0b1bd54",
                 "parameters": [
                     {
                         "name": "id",
@@ -630,13 +640,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/delete-artist/{id}": {
             "delete": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Delete an artist",
-                "operationId": "8b4067da292e7b4c226ffb95ecbe82e9",
+                "operationId": "01bfcdaca6f04274b6ddcedd5806f652",
                 "parameters": [
                     {
                         "name": "id",
@@ -891,13 +903,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/create-song": {
             "post": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Create a new song",
-                "operationId": "a28be4ced5c180620b197c9144c70376",
+                "operationId": "70a1519f6ac1b26365be893aa16f177d",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -958,13 +972,13 @@
                 ]
             }
         },
-        "/songs/{id}": {
+        "/song/{id}": {
             "get": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Get song by ID with album and artist",
-                "operationId": "485f590f1416afbb2a0aab6b12305004",
+                "operationId": "88601f99bc2f18fd5ae52710abefd37d",
                 "parameters": [
                     {
                         "name": "id",
@@ -1045,13 +1059,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/update-song/{id}": {
             "put": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Update existing song",
-                "operationId": "caa5ed09d1ac8aeae370bbe30ae55004",
+                "operationId": "9d93daa24f36fca0fb2c7b520f658c26",
                 "parameters": [
                     {
                         "name": "id",
@@ -1116,13 +1132,15 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/delete-song/{id}": {
             "delete": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Delete a song",
-                "operationId": "ede008b9ebf14f39a6479db6065feaea",
+                "operationId": "e345b004dde47c460287efce5237bacc",
                 "parameters": [
                     {
                         "name": "id",
