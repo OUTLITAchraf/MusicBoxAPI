@@ -16,9 +16,10 @@ class SongController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/songs",
+     *     path="/songs",
      *     tags={"Songs"},
      *     summary="Get list of songs",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -59,9 +60,10 @@ class SongController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/songs",
+     *     path="/songs",
      *     tags={"Songs"},
      *     summary="Create a new song",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -103,9 +105,10 @@ class SongController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/songs/{id}",
+     *     path="/songs/{id}",
      *     tags={"Songs"},
      *     summary="Get song by ID with album and artist",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -166,9 +169,10 @@ class SongController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/songs/{id}",
+     *     path="/songs/{id}",
      *     tags={"Songs"},
      *     summary="Update existing song",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -217,9 +221,10 @@ class SongController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/songs/{id}",
+     *     path="/songs/{id}",
      *     tags={"Songs"},
      *     summary="Delete a song",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -255,6 +260,7 @@ class SongController extends Controller
      *     path="/api/songs/search",
      *     tags={"Songs"},
      *     summary="Search songs by title or artist",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="title",
      *         in="query",
@@ -293,25 +299,25 @@ class SongController extends Controller
      */
     public function search(Request $request)
     {
-        $query = Song::with('album.artist');
+            $query = Song::with('album.artist');
 
         if ($request->has('title')) {
             $query->where('title', 'LIKE', '%' . $request->title . '%');
-        }
+            }
 
         if ($request->has('artist')) {
             $query->whereHas('album.artist', function ($q) use ($request) {
                 $q->where('name', 'LIKE', '%' . $request->artist . '%');
-            });
-        }
+                });
+            }
 
         $songs = $query->paginate(10);
 
-        if ($songs->isEmpty()) {
-            return response()->json([
+            if ($songs->isEmpty()) {
+                return response()->json([
                 'message'=>'No Data Found Match Your Search'
-            ], 404);
-        }
+                ], 404);
+            }
 
         return response()->json($songs);
     }

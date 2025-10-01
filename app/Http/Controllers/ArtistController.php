@@ -16,9 +16,10 @@ class ArtistController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/artists",
+     *     path="/artists",
      *     tags={"Artists"},
      *     summary="Get list of artists",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="genre",
      *         in="query",
@@ -48,7 +49,7 @@ class ArtistController extends Controller
      *     )
      * )
      */
-    public function index(Request $request) 
+    public function index(Request $request)
     {
 
         $query = Artist::query();
@@ -69,9 +70,10 @@ class ArtistController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/artists",
+     *     path="/artists",
      *     tags={"Artists"},
      *     summary="Create a new artist",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -100,7 +102,7 @@ class ArtistController extends Controller
      *     )
      * )
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
 
         $validated = $request->validate([
@@ -119,9 +121,10 @@ class ArtistController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/artists/{id}",
+     *     path="/artists/{id}",
      *     tags={"Artists"},
      *     summary="Get artist by ID with their albums and songs",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -166,7 +169,7 @@ class ArtistController extends Controller
      *     )
      * )
      */
-    public function show($id) 
+    public function show($id)
     {
         $artist = Artist::findOrFail($id);
         $artist->load('albums.songs');
@@ -179,9 +182,10 @@ class ArtistController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/artists/{id}",
+     *     path="/artists/{id}",
      *     tags={"Artists"},
      *     summary="Update existing artist",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -212,7 +216,7 @@ class ArtistController extends Controller
      *     )
      * )
      */
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
     {
 
         $validated = $request->validate([
@@ -232,9 +236,10 @@ class ArtistController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/artists/{id}",
+     *     path="/artists/{id}",
      *     tags={"Artists"},
      *     summary="Delete an artist",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -255,7 +260,7 @@ class ArtistController extends Controller
      *     )
      * )
      */
-    public function destroy($id) 
+    public function destroy($id)
     {
         $artist = Artist::findOrFail($id);
         $artist->delete();

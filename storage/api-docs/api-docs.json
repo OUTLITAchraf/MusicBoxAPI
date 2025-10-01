@@ -15,13 +15,13 @@
         }
     ],
     "paths": {
-        "/api/albums": {
+        "/albums": {
             "get": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Get list of albums",
-                "operationId": "735609843dcfb89ee4e12e340eddca25",
+                "operationId": "1da83b13e3f02c4fee3c24e70098d603",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -68,14 +68,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Create a new album",
-                "operationId": "2252aa8fd63b7d2fa1203c1735943d46",
+                "operationId": "e2953334b8702ac4d6cc93c63b7440ef",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -131,16 +136,21 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/albums/{id}": {
+        "/albums/{id}": {
             "get": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Get album by ID with artist and songs",
-                "operationId": "71e9c4179582355e89419e6f6994c418",
+                "operationId": "6a68209549d4d66cd13500611af64336",
                 "parameters": [
                     {
                         "name": "id",
@@ -171,14 +181,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Update album",
-                "operationId": "1300ec85cc590b1ae1468c9bf8db122d",
+                "operationId": "9d45cc434d36c93ef067bbd2be12a53c",
                 "parameters": [
                     {
                         "name": "id",
@@ -239,14 +254,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
                     "Albums"
                 ],
                 "summary": "Delete album",
-                "operationId": "cabfc7c152115607d310827d46a82d5a",
+                "operationId": "b148d53b889a5c777b217bb73821307e",
                 "parameters": [
                     {
                         "name": "id",
@@ -274,16 +294,21 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/artists": {
+        "/artists": {
             "get": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Get list of artists",
-                "operationId": "2c8aed1387cca1c65d98da7ee11ac926",
+                "operationId": "392d5b22a13c0e6acda09059973b671b",
                 "parameters": [
                     {
                         "name": "genre",
@@ -341,14 +366,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Create a new artist",
-                "operationId": "83d2888bdc6fac66b9a7cc81c4c950fb",
+                "operationId": "02d849b7e76cdecf89814f7cf5ad17e3",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -419,16 +449,21 @@
                     "422": {
                         "description": "Validation error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/artists/{id}": {
+        "/artists/{id}": {
             "get": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Get artist by ID with their albums and songs",
-                "operationId": "d0b68c06b8bc310fbe24c6d3ea80dac3",
+                "operationId": "72409b143e96ba16780ec0cf7bf56b62",
                 "parameters": [
                     {
                         "name": "id",
@@ -513,14 +548,19 @@
                     "404": {
                         "description": "Artist not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Update existing artist",
-                "operationId": "5a5632ea389f9a05336f8d035f5a44c0",
+                "operationId": "5384c3d91429ef750acd6efe62cddef3",
                 "parameters": [
                     {
                         "name": "id",
@@ -584,14 +624,19 @@
                     "404": {
                         "description": "Artist not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
                     "Artists"
                 ],
                 "summary": "Delete an artist",
-                "operationId": "4f6d8bd2c8b4b738af7589b72348ac20",
+                "operationId": "8b4067da292e7b4c226ffb95ecbe82e9",
                 "parameters": [
                     {
                         "name": "id",
@@ -623,16 +668,21 @@
                     "404": {
                         "description": "Artist not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/login": {
+        "/login": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Login user",
-                "operationId": "bc76a9d52929cab7a147ca7b5c527430",
+                "operationId": "42f77e072dec84b0e1094cca1228298e",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -685,13 +735,13 @@
                 }
             }
         },
-        "/api/logout": {
+        "/logout": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Logout user",
-                "operationId": "0ab4e3cf7bc4f7ec81b48f7928c7de7c",
+                "operationId": "03afb12b342c2ea43bdc1de4f39e91a8",
                 "responses": {
                     "200": {
                         "description": "Logout successful",
@@ -717,13 +767,13 @@
                 ]
             }
         },
-        "/api/register": {
+        "/register": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Register new user",
-                "operationId": "18235ea6963e661c49bf381065779d6a",
+                "operationId": "573de1fed352c1205a32c4d1b9877375",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -787,13 +837,13 @@
                 }
             }
         },
-        "/api/songs": {
+        "/songs": {
             "get": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Get list of songs",
-                "operationId": "0388bb28c35eec49b8b492d169ce3575",
+                "operationId": "7cff74aca8adedf68f8a9248996cdc0d",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -835,14 +885,19 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Create a new song",
-                "operationId": "2f1970b82d91cc715578d972189f19cb",
+                "operationId": "a28be4ced5c180620b197c9144c70376",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -895,16 +950,21 @@
                     "422": {
                         "description": "Validation error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/songs/{id}": {
+        "/songs/{id}": {
             "get": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Get song by ID with album and artist",
-                "operationId": "4325a96361d1d3820cc0580eaae9197c",
+                "operationId": "485f590f1416afbb2a0aab6b12305004",
                 "parameters": [
                     {
                         "name": "id",
@@ -979,14 +1039,19 @@
                     "404": {
                         "description": "Song not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Update existing song",
-                "operationId": "452de7f8f11a121cd11e9430565632c3",
+                "operationId": "caa5ed09d1ac8aeae370bbe30ae55004",
                 "parameters": [
                     {
                         "name": "id",
@@ -1045,14 +1110,19 @@
                     "404": {
                         "description": "Song not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Delete a song",
-                "operationId": "829c1a52ae5013ce3ff4b9829a31485f",
+                "operationId": "ede008b9ebf14f39a6479db6065feaea",
                 "parameters": [
                     {
                         "name": "id",
@@ -1084,16 +1154,21 @@
                     "404": {
                         "description": "Song not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/api/songs/search": {
+        "/songs/search": {
             "get": {
                 "tags": [
                     "Songs"
                 ],
                 "summary": "Search songs by title or artist",
-                "operationId": "e1a974ad7df9d6985c4b5a8084fb042f",
+                "operationId": "486ea09f311b6528edc8cbe1d46f21a8",
                 "parameters": [
                     {
                         "name": "title",
@@ -1158,7 +1233,12 @@
                     "404": {
                         "description": "No songs found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },

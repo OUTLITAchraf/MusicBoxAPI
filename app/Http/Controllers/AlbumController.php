@@ -16,9 +16,10 @@ class AlbumController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/albums",
+     *     path="/albums",
      *     tags={"Albums"},
      *     summary="Get list of albums",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -60,9 +61,10 @@ class AlbumController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/albums",
+     *     path="/albums",
      *     tags={"Albums"},
      *     summary="Create a new album",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -102,9 +104,10 @@ class AlbumController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/albums/{id}",
+     *     path="/albums/{id}",
      *     tags={"Albums"},
      *     summary="Get album by ID with artist and songs",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -142,9 +145,10 @@ class AlbumController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/albums/{id}",
+     *     path="/albums/{id}",
      *     tags={"Albums"},
      *     summary="Update album",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -190,9 +194,10 @@ class AlbumController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/albums/{id}",
+     *     path="/albums/{id}",
      *     tags={"Albums"},
      *     summary="Delete album",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

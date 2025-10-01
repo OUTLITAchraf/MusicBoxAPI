@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/api/login",
+     *     path="/login",
      *     tags={"Authentication"},
      *     summary="Login user",
      *     @OA\RequestBody(
@@ -67,7 +67,7 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/logout",
+     *     path="/logout",
      *     tags={"Authentication"},
      *     summary="Logout user",
      *     security={{"bearerAuth":{}}},
