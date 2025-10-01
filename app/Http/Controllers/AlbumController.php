@@ -158,9 +158,9 @@ class AlbumController extends Controller
      *     @OA\RequestBody(
      *         @OA\JsonContent(
      *             required={"title","genre","release_date","artist_id"},
-     *             @OA\Property(property="title", type="string"),
-     *             @OA\Property(property="genre", type="string"),
-     *             @OA\Property(property="release_date", type="string", format="date"),
+     *             @OA\Property(property="title", type="string", example="Updated Album"),
+     *             @OA\Property(property="genre", type="string", example="Pop"),
+     *             @OA\Property(property="release_date", type="string",format="date", example="2023-10-01"),
      *             @OA\Property(property="artist_id", type="integer")
      *         )
      *     ),

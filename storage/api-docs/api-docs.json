@@ -220,14 +220,17 @@
                                 ],
                                 "properties": {
                                     "title": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "Updated Album"
                                     },
                                     "genre": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "Pop"
                                     },
                                     "release_date": {
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "example": "2023-10-01"
                                     },
                                     "artist_id": {
                                         "type": "integer"
