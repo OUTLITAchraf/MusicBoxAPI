@@ -1,66 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MusicBox API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A RESTful API built with Laravel for managing a music library, including artists, albums, and songs. This API allows users to perform CRUD operations on music data with secure authentication.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Artist Management**: Create, read, update, and delete artists with details like name, genre, and country.
+- **Album Management**: Manage albums linked to artists, including title, genre, and release date.
+- **Song Management**: Handle songs associated with albums, with title and duration.
+- **Search Functionality**: Search for songs by various criteria.
+- **Authentication**: Secure API access using Laravel Sanctum for token-based authentication.
+- **API Documentation**: Interactive API documentation powered by Swagger (L5-Swagger).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP ^8.1
+- Composer
+- Laravel ^10.10
+- MySQL or compatible database
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd MusicBoxAPI
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. **Install dependencies**:
+   ```bash
+   composer install
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. **Environment setup**:
+   - Copy `.env.example` to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Configure your database settings in `.env`:
+     ```
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=musicbox_api
+     DB_USERNAME=your_username
+     DB_PASSWORD=your_password
+     ```
 
-## Laravel Sponsors
+4. **Generate application key**:
+   ```bash
+   php artisan key:generate
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+5. **Run migrations**:
+   ```bash
+   php artisan migrate
+   ```
 
-### Premium Partners
+6. **Seed the database (optional)**:
+   ```bash
+   php artisan db:seed
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+7. **Start the server**:
+   ```bash
+   php artisan serve
+   ```
+
+The API will be available at `http://localhost:8000`.
+
+## Authentication
+
+This API uses Laravel Sanctum for authentication. To access protected endpoints:
+
+1. **Register a user**:
+   ```bash
+   POST /api/register
+   Content-Type: application/json
+
+   {
+     "name": "Your Name",
+     "email": "your@email.com",
+     "password": "yourpassword",
+     "password_confirmation": "yourpassword"
+   }
+   ```
+
+2. **Login to get a token**:
+   ```bash
+   POST /api/login
+   Content-Type: application/json
+
+   {
+     "email": "your@email.com",
+     "password": "yourpassword"
+   }
+   ```
+
+   Response includes a token. Use this token in the `Authorization` header for subsequent requests:
+   ```
+   Authorization: Bearer your_token_here
+   ```
+
+3. **Logout**:
+   ```bash
+   POST /api/logout
+   Authorization: Bearer your_token_here
+   ```
+
+## API Endpoints
+
+All protected endpoints require authentication via Bearer token.
+
+### Artists
+- `GET /api/artists` - List all artists
+- `GET /api/artist/{id}` - Get specific artist
+- `POST /api/create-artist` - Create new artist
+- `PUT /api/update-artist/{id}` - Update artist
+- `DELETE /api/delete-artist/{id}` - Delete artist
+
+### Albums
+- `GET /api/albums` - List all albums
+- `GET /api/album/{id}` - Get specific album
+- `POST /api/create-album` - Create new album
+- `PUT /api/update-album/{id}` - Update album
+- `DELETE /api/delete-album/{id}` - Delete album
+
+### Songs
+- `GET /api/songs` - List all songs
+- `GET /api/song/{id}` - Get specific song
+- `GET /api/songs/search` - Search songs
+- `POST /api/create-song` - Create new song
+- `PUT /api/update-song/{id}` - Update song
+- `DELETE /api/delete-song/{id}` - Delete song
+
+## API Documentation
+
+Interactive API documentation is available via Swagger. After starting the server, visit:
+```
+http://localhost:8000/api/documentation
+```
+
+## Testing
+
+Run the test suite:
+```bash
+php artisan test
+```
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
